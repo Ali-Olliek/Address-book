@@ -3,7 +3,7 @@ const User = require("../../../model/User");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-async function get(req, res) {
+async function getAll(req, res) {
   
   try {
     console.log(req.query);
@@ -65,7 +65,7 @@ async function register(req, res) {
     user.token = token;
 
     // return new user
-    res.status(201).json(user);
+    res.status(200).json(user);
   } catch (err) {
     console.log(err);
   }
@@ -108,7 +108,7 @@ async function login(req, res) {
 }
 
 module.exports = {
-  get,
+  getAll,
   register,
   login,
 };
