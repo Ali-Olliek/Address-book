@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 async function get(req, res) {
+  
   try {
     console.log(req.query);
 
@@ -46,7 +47,7 @@ async function register(req, res) {
     encryptedPassword = await bcrypt.hash(password, 10);
 
     // Create user in our database
-    const user = await User.create({
+    const user = await addUser({
       name,
       email: email.toLowerCase(), // sanitize: convert email to lowercase
       password: encryptedPassword,
@@ -104,7 +105,6 @@ async function login(req, res) {
   } catch (err) {
     console.log(err);
   }
-  // Our register logic ends here
 }
 
 module.exports = {
