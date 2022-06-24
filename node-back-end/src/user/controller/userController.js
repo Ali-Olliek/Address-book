@@ -2,7 +2,6 @@ const { getUsers, addUser, getByEmail } = require('../service');
 const User = require("../../../model/User");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const TOKEN_KEY = `${process.env.TOKEN_SECRET}` || "";
 
 async function get(req, res) {
   try {
@@ -37,7 +36,7 @@ async function register(req, res) {
 
     // check if user already exist
     // Validate if user exist in our database
-    const oldUser = await User.findOne({ email });
+    const oldUser = await getByEmail({ email });
 
     if (oldUser) {
       return res.status(409).send("User Already Exist. Please Login");
@@ -71,8 +70,8 @@ async function register(req, res) {
   }
 }
 
-async function register(req, res) {
-
+async function login(req, res) {
+  console.log(req.body)
   try {
     // Get user input
     const { email, password } = req.body;
@@ -81,6 +80,7 @@ async function register(req, res) {
     if (!(email && password)) {
       res.status(400).send("All input is required");
     }
+
     // Validate if user exist in our database
     const user = await User.findOne({ email });
 
@@ -88,7 +88,7 @@ async function register(req, res) {
       // Create token
       const token = jwt.sign(
         { user_id: user._id, email },
-        process.env.TOKEN_KEY,
+        `${process.env.TOKEN_SECRET}`,
         {
           expiresIn: "2h",
         }
@@ -104,6 +104,7 @@ async function register(req, res) {
   } catch (err) {
     console.log(err);
   }
+  // Our register logic ends here
 }
 
 module.exports = {

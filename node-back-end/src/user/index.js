@@ -8,7 +8,7 @@ const JWTMiddleware = require("../../middleware/auth.js");
 
 router.get('/', JWTMiddleware, (req, res) => get(req, res));
 router.post('/auth/register',register);
-// router.post('/auth/login', login);
+router.post('/auth/login', login);
 
 // localhost:3000/api/user/
 // localhost:3000/api/user/auth/register
