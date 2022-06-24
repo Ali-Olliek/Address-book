@@ -3,7 +3,6 @@ const User = require("../../../model/Contact");
 const jwt = require("jsonwebtoken");
 
 async function createContact(req, res) {
-    console.log("Hello?")
     try {
         const { 
             name,
@@ -18,8 +17,8 @@ async function createContact(req, res) {
             res.status(400).send("Missing Required Input");
         }
 
-        const oldContact = await getContact ({ phone_number })
-
+        const oldContact = await getContact ( {phone_number, email} )
+        console.log(oldContact)
         if (oldContact) {
             return res.status(409).send(`Contact Already Assigned ${oldContact}`);
         }
@@ -37,13 +36,41 @@ async function createContact(req, res) {
         console.log(err);
     }
 };
-// async function displayAll(req, res) {}
-// async function displayOne(req, res) {}
+
+async function displayAll(req, res) {
+
+    try {
+    if (req.body.user_id) {
+      const id = req.body.user_id;
+      const result = await getContacts(id);
+      console.log("Contacts for this Users =>", result);
+      return res.status(200).send(result);
+    }
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function displayOne(req, res) {
+
+    try { 
+        if(req.body.contact_id) {
+        const id = req.body.contact_id
+        const result = await getContact(id);
+        console.log("Contact => ", result);
+        return res.status(200).send(result)
+        }
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 // async function search(req, res) {}
 
 module.exports = {
   createContact,
-//   displayAll,
-//   displayOne,
+  displayAll,
+  displayOne,
 //   search
 };

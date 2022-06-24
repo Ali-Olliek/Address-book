@@ -1,7 +1,7 @@
 const Contact = require("../../model/Contact");
 
-async function getContacts() {
-  return await Contact.find();
+async function getContacts(id) {
+  return await Contact.find({user_id: id});
 };
 
 async function addContact( body ) {
@@ -19,10 +19,11 @@ async function addContact( body ) {
   return await contact.save();
 };
 
-async function getContact(id) {
-  return await Contact.findOne({ id });
+async function getContact({ id = null, phone_number = null, email = null}) {
+  if ({id}) return await Contact.findOne(id);
+  else if (phone_number) return await Contact.findOne( phone_number );
+  else if (email) return await Contact.findOne( email );
 };
-
 
 // Search based on request given
 async function search (contact_name = null, contact_number = null, contact_email = null) {

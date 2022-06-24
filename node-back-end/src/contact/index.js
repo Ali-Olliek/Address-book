@@ -7,8 +7,8 @@ const router = Router();
 // res -> your api response
 
 // router.get("/", JWTMiddleware, (req, res) => get(req, res));
-// router.get("/Contacts", displayAll); 
-// router.get("/Contacts/:id", displayOne);
+router.get("/Contacts", displayAll); 
+router.get("/Contact", displayOne);
 router.post("/CreateContact", createContact)
 // router.get("/Contacts/Search/:name?/:number?/:email?", search);
 // ^ stackoverflow.com/a/41748728/18590539

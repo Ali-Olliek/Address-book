@@ -29,10 +29,8 @@ const contactSchema = new mongoose.Schema({
     coordinates: [],
   },
   user_id: {
-    type: String,
-    required: true,
-    min: 6,
-    max: 255,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
   },
   date: {
     type: Date,
