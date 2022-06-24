@@ -1,14 +1,14 @@
 const { Router } = require('express');
-const { get, register, login } = require('./controller/user');
+const { get, register, login } = require('./controller/userController');
 const router = Router();
-const testMiddleware = require('../../middleware/test');
+const JWTMiddleware = require("../../middleware/auth.js");
 
 // req -> from postman
 // res -> your api response
 
-router.get('/', testMiddleware(), (req, res) => get(req, res));
-router.post('/auth/register', register);
-router.post('/auth/login', login);
+router.get('/', JWTMiddleware, (req, res) => get(req, res));
+router.post('/auth/register',register);
+// router.post('/auth/login', login);
 
 // localhost:3000/api/user/
 // localhost:3000/api/user/auth/register
