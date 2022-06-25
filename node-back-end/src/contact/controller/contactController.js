@@ -3,8 +3,9 @@ const {
   getContactbyId,
   getContact,
   addContact,
-  search,
+  searchContacts,
 } = require("../service");
+
 const User = require("../../../model/Contact");
 const jwt = require("jsonwebtoken");
 
@@ -71,11 +72,26 @@ async function displayOne(req, res) {
     }
 }
 
-// async function search(req, res) {}
+async function search(req, res) {
+    try {
+        const name = req.body.name;
+        const email = req.body.email;
+        const number = req.body.number;
+        const method = req.body.method;
+
+        const result = await searchContacts(name, email, number, method);
+        console.log("found => ", result);
+
+    return res.status(200).send(result);
+    } catch (error) {
+        console.log(error)
+    }
+}
+    
 
 module.exports = {
   createContact,
   displayAll,
   displayOne,
-//   search
+  search
 };

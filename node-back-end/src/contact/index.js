@@ -10,7 +10,7 @@ const router = Router();
 router.get("/Contacts", displayAll); 
 router.get("/Contact", displayOne);
 router.post("/CreateContact", createContact)
-// router.get("/Contacts/Search/:name?/:number?/:email?", search);
+router.get("/Search/:name?/:number?/:email?", search);
 // ^ stackoverflow.com/a/41748728/18590539
 
 // localhost:3000/api/Contacts

@@ -30,21 +30,40 @@ async function getContact( phone_number, email) {
 };
 
 // Search based on request given
-async function search (contact_name = null, contact_number = null, contact_email = null) {
-    if(contact_name) {
-        const name = contact_name;
-        const regex = new RegExp(name, "i"); // i for case insensitive
-        Contact.find({ name: { $regex: regex } }); 
-        // https://stackoverflow.com/a/63435547/18590539
+async function searchContacts (contact_name, contact_number, contact_email, search_method) {
+  if (contact_name) {
+    if (search_method === "includes") {
+      return await Contact.find({ "name": new RegExp(contact_name)});
+       // https://stackoverflow.com/a/10616781/18590539
+    } else if (search_method === "starts") { 
+      return await Contact.find({ "name": new RegExp({ $regex: '/HayD/', $options: "i"})});
+
+    } else if (search_method === "ends") {
+      return await Contact.find({ 'name': new RegExp({contact_name, options: "i"}) });
+    } 
+      return "no method given";
+    // https://stackoverflow.com/a/63435547/18590539
 
     } else if (contact_number) {
-        const number = contact_number;
-        const regex = new RegExp(number, "i");
-        Contact.find({number: {$regex: regex}})
+        if (search_method === "includes") {
+          return await Contact.find({ name: new RegExp(contact_number)});
+        } else if (search_method === "ends") {
+          return await Contact.find({ name: new RegExp(contact_name) });
+        } else if (search_method === "starts") {
+          return await Contact.find({ name: new RegExp(contact_name) });
+        }
+        return ("no method given");
+
     } else if (contact_email) {
-        const email = contact_email;
-        const regex = new RegExp (email, "i");
-        Contact.find({ email: {$regex: regex}})
+        if (search_method === "includes") {
+          return await Contact.find({ name: new RegExp(contact_email) });
+        } else if (search_method === "ends") {
+          return await Contact.find({ name: new RegExp(contact_name) });
+        } else if (search_method === "starts") {
+          return await Contact.find({ name: new RegExp(contact_name) });
+
+        }
+        return ("no method given");
     }
     else return console.log("Nothing Submitted for Searching")
 }
@@ -54,5 +73,5 @@ module.exports = {
   addContact,
   getContact,
   getContactbyId,
-  search,
+  searchContacts,
 };
