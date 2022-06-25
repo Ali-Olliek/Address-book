@@ -1,9 +1,10 @@
 const {
-    getContact,
-    addContact,
-    getContacts,
-    searchContacts,
-    getContactbyId,
+  getContact,
+  addContact,
+  getContacts,
+  searchContacts,
+  getContactById,
+  deleteContactById,
 } = require("../service");
 
 const User = require("../../../model/Contact");
@@ -57,6 +58,17 @@ async function updateContact (req, res) {   // https://www.youtube.com/watch?v=M
     .catch(err => next(err));
 } 
 
+// ------------DElETE A SINGLE CONTACT------------- //
+async function deleteContact (req, res) {
+ 
+    const id = {_id: req.params.id}
+    try {
+        await deleteContactById(id);
+        return res.status(200).send("success")
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 // ------------DISPLAY ALL CONTACTS------------- //
 
@@ -83,7 +95,7 @@ async function displayOne(req, res) {
     try { 
         if(req.body.contact_id) {
         const id = req.body.contact_id
-        const result = await getContactbyId(id);
+        const result = await getContactById(id);
         console.log("Contact => ", result);
         return res.status(200).send(result)
         }
@@ -117,4 +129,5 @@ module.exports = {
     displayOne,
     updateContact,
     createContact,
+    deleteContact,
 };

@@ -24,8 +24,14 @@ async function addContact( body ) {
 
 // ------------GET A SINGLE CONTACT BY ID------------- //
 
-async function getContactbyId (id) {
+async function getContactById (id) {
   return await Contact.findById(id)
+};
+// ------------DELETE A SINGLE CONTACT BY ID------------- //
+
+async function deleteContactById (id) {
+  console.log("hello from here")
+  return await Contact.deleteOne({_id: id})
 };
 
 // ------------GET A SINGLE CONTACT BY EMAIL OR PHONE_NUMBER------------- //
@@ -86,5 +92,6 @@ module.exports = {
   getContact,
   getContacts,
   searchContacts,
-  getContactbyId,
+  getContactById,
+  deleteContactById,
 };
