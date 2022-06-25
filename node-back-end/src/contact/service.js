@@ -19,10 +19,14 @@ async function addContact( body ) {
   return await contact.save();
 };
 
-async function getContact({ id = null, phone_number = null, email = null}) {
-  if ({id}) return await Contact.findOne(id);
-  else if (phone_number) return await Contact.findOne( phone_number );
-  else if (email) return await Contact.findOne( email );
+async function getContactbyId (id) {
+  return await Contact.findById(id)
+};
+
+async function getContact( phone_number, email) {
+  if (phone_number) return await Contact.findOne( { phone_number: phone_number } );
+  else if (email) return await Contact.findOne({ email : email } );
+  return ("Contact Already in Database")
 };
 
 // Search based on request given
@@ -32,6 +36,7 @@ async function search (contact_name = null, contact_number = null, contact_email
         const regex = new RegExp(name, "i"); // i for case insensitive
         Contact.find({ name: { $regex: regex } }); 
         // https://stackoverflow.com/a/63435547/18590539
+
     } else if (contact_number) {
         const number = contact_number;
         const regex = new RegExp(number, "i");
@@ -48,5 +53,6 @@ module.exports = {
   getContacts,
   addContact,
   getContact,
+  getContactbyId,
   search,
 };
