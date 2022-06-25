@@ -3,7 +3,7 @@ const User = require("../../../model/User");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-async function getAll(req, res) {
+async function get(req, res) {
   
   try {
     console.log(req.query);
@@ -108,7 +108,7 @@ async function login(req, res) {
 }
 
 module.exports = {
-  getAll,
+  get,
   register,
   login,
 };

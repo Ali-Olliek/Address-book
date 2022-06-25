@@ -1,4 +1,10 @@
-const { getContacts, getContact, addContact, search } = require("../service");
+const {
+  getContacts,
+  getContactbyId,
+  getContact,
+  addContact,
+  search,
+} = require("../service");
 const User = require("../../../model/Contact");
 const jwt = require("jsonwebtoken");
 
@@ -17,8 +23,7 @@ async function createContact(req, res) {
             res.status(400).send("Missing Required Input");
         }
 
-        const oldContact = await getContact ( {phone_number, email} )
-        console.log(oldContact)
+        const oldContact = await getContact ( phone_number, email )
         if (oldContact) {
             return res.status(409).send(`Contact Already Assigned ${oldContact}`);
         }
@@ -57,7 +62,7 @@ async function displayOne(req, res) {
     try { 
         if(req.body.contact_id) {
         const id = req.body.contact_id
-        const result = await getContact(id);
+        const result = await getContactbyId(id);
         console.log("Contact => ", result);
         return res.status(200).send(result)
         }
