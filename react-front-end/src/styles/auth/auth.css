@@ -1,0 +1,67 @@
+@font-face {
+    font-family: Sofia Pro;
+    src: url(../../assets/fonts/sofiapro-light.otf);
+}
+
+@font-face {
+    font-family: Poppins;
+    src: url(../../assets/fonts/Poppins-Light.ttf);
+}
+
+@font-face {
+    font-family: Poppinsb;
+    src: url(../../assets/fonts/Poppins-Bold.ttf);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.Page {
+    z-index: 3;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.Form {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;  
+    border: 1px solid black;
+    padding: 10px 20px;
+    height: 50vh;
+    width: 30vw;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.Form > h2 {
+    font-family: Poppinsb;
+}
+
+.Form > p {
+    font-family: Poppins;
+    margin-top: -60px;
+}
+
+.Form > input {
+    z-index: 0;
+    height: 40px;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-family: Sofia Pro;
+}
+
+.Form > button {
+    z-index: 0;
+    height: 40px;
+    border-radius: 5px;
+    font-family: Sofia Pro;
+}
+
