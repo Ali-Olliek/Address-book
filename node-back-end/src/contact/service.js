@@ -1,3 +1,4 @@
+const { options } = require(".");
 const Contact = require("../../model/Contact");
 
 async function getContacts(id) {
@@ -30,37 +31,41 @@ async function getContact( phone_number, email) {
 };
 
 // Search based on request given
-async function searchContacts (contact_name, contact_number, contact_email, search_method) {
-  if (contact_name) {
-    if (search_method === "includes") {
-      return await Contact.find({ "name": new RegExp(contact_name)});
-       // https://stackoverflow.com/a/10616781/18590539
-    } else if (search_method === "starts") { 
-      return await Contact.find({ "name": new RegExp({ $regex: '/HayD/', $options: "i"})});
+async function searchContacts (name,  email, number, method) {
 
-    } else if (search_method === "ends") {
-      return await Contact.find({ 'name': new RegExp({contact_name, options: "i"}) });
+  if (name) {
+    if (method === "includes") {
+      return await Contact.find({ 'name': new RegExp(name) }); // https://stackoverflow.com/a/10616781/18590539
+    
+    } else if (method === "starts") { 
+      return await Contact.find({ 'name': { $regex: "^" + name, $options: 'i' }}); // https://stackoverflow.com/a/29809918/18590539
+
+    } else if (method === "ends") {
+      return await Contact.find({ 'name': { $regex: name + "$", $options: "i" }}); // https://stackoverflow.com/a/61211127/18590539
     } 
       return "no method given";
-    // https://stackoverflow.com/a/63435547/18590539
 
-    } else if (contact_number) {
-        if (search_method === "includes") {
-          return await Contact.find({ name: new RegExp(contact_number)});
-        } else if (search_method === "ends") {
-          return await Contact.find({ name: new RegExp(contact_name) });
-        } else if (search_method === "starts") {
-          return await Contact.find({ name: new RegExp(contact_name) });
+    } else if (number) {
+        if (method === "includes") {
+          return await Contact.find({ 'phone_number': new RegExp(number) });
+
+        } else if (method === "starts") {
+          return await Contact.find({ 'phone_number': { $regex: "^" + number }});
+
+        } else if (method === "ends") {
+          return await Contact.find({ 'phone_number': { $regex: number + "$" }});
         }
         return ("no method given");
 
-    } else if (contact_email) {
-        if (search_method === "includes") {
-          return await Contact.find({ name: new RegExp(contact_email) });
-        } else if (search_method === "ends") {
-          return await Contact.find({ name: new RegExp(contact_name) });
-        } else if (search_method === "starts") {
-          return await Contact.find({ name: new RegExp(contact_name) });
+    } else if (email) {
+        if (method === "includes") {
+          return await Contact.find({ 'email': new RegExp(email) });
+
+        } else if (method === "starts") {
+          return await Contact.find({ 'email': { $regex: "^" + email }}); 
+
+        } else if (method === "ends") {
+          return await Contact.find({ 'email': { $regex: email + "$" }});
 
         }
         return ("no method given");
