@@ -1,4 +1,7 @@
-const { findByIdAndUpdate } = require("../../model/Contact");
+// All queries needed to execute the functions from the Controller
+// includes creating, searching, getting by id, and deleting
+
+
 const Contact = require("../../model/Contact");
 
 async function getContacts(id) {
@@ -58,32 +61,34 @@ async function searchContacts (name,  email, number, method) {
         return await Contact.find({ 'name': { $regex: name + "$", $options: "i" }}); // https://stackoverflow.com/a/61211127/18590539
     } 
       return "no method given";
+    } 
 
-    } else if (number) {
-        if (method === "includes") {
-          return await Contact.find({ 'phone_number': new RegExp(number) });
+  else if (number) {
+    if (method === "includes") {
+      return await Contact.find({ 'phone_number': new RegExp(number) });
 
-        } else if (method === "starts") {
-          return await Contact.find({ 'phone_number': { $regex: "^" + number }});
+    } else if (method === "starts") {
+      return await Contact.find({ 'phone_number': { $regex: "^" + number }});
 
-        } else if (method === "ends") {
-          return await Contact.find({ 'phone_number': { $regex: number + "$" }});
-        }
-        return ("no method given");
-
-    } else if (email) {
-        if (method === "includes") {
-          return await Contact.find({ 'email': new RegExp(email) });
-
-        } else if (method === "starts") {
-          return await Contact.find({ 'email': { $regex: "^" + email }}); 
-
-        } else if (method === "ends") {
-          return await Contact.find({ 'email': { $regex: email + "$" }});
-
-        }
-        return ("no method given");
+    } else if (method === "ends") {
+      return await Contact.find({ 'phone_number': { $regex: number + "$" }});
     }
+    return ("no method given");
+    } 
+    
+  else if (email) {
+    if (method === "includes") {
+      return await Contact.find({ 'email': new RegExp(email) });
+
+    } else if (method === "starts") {
+      return await Contact.find({ 'email': { $regex: "^" + email }}); 
+
+    } else if (method === "ends") {
+      return await Contact.find({ 'email': { $regex: email + "$" }});
+
+    }
+    return ("no method given");
+  }
     else return console.log("Nothing Submitted for Searching")
 }
 

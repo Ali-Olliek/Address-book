@@ -1,3 +1,6 @@
+// The contact has all functions related to the contacts
+// from creating, updating, deleting, and searching
+
 const {
   getContact,
   addContact,

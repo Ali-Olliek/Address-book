@@ -1,12 +1,20 @@
 const { Router } = require("express");
-const { displayAll, displayOne, search, createContact, updateContact, deleteContact} = require("./controller/contactController"); // needs update
+const { 
+    displayAll,
+    displayOne,
+    search,
+    createContact,
+    updateContact,
+    deleteContact
+    } = require("./controller/contactController");
+
 const router = Router();
-// const JWTMiddleware = require("../../middleware/auth.js");
+const JWTMiddleware = require("../../middleware/auth.js");
 
 // req -> from postman
 // res -> your api response
 
-// router.get("/", JWTMiddleware, (req, res) => get(req, res));
+router.get("/", JWTMiddleware, (req, res) => get(req, res));
 router.get("/Contacts", displayAll); 
 router.get("/Contact", displayOne);
 router.post("/CreateContact", createContact);
