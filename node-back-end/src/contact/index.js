@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { displayAll, displayOne, search, createContact } = require("./controller/contactController"); // needs update
+const { displayAll, displayOne, search, createContact, updateContact} = require("./controller/contactController"); // needs update
 const router = Router();
 // const JWTMiddleware = require("../../middleware/auth.js");
 
@@ -9,8 +9,10 @@ const router = Router();
 // router.get("/", JWTMiddleware, (req, res) => get(req, res));
 router.get("/Contacts", displayAll); 
 router.get("/Contact", displayOne);
-router.post("/CreateContact", createContact)
-router.get("/Search/:name?/:number?/:email?", search);
+router.post("/CreateContact", createContact);
+router.post("/UpdateContact/:id?", updateContact);
+router.get("/Search", search);
+
 // ^ stackoverflow.com/a/41748728/18590539
 
 // localhost:3000/api/Contacts

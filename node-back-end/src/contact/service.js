@@ -1,9 +1,11 @@
-const { options } = require(".");
+const { findByIdAndUpdate } = require("../../model/Contact");
 const Contact = require("../../model/Contact");
 
 async function getContacts(id) {
   return await Contact.find({user_id: id});
 };
+
+// ------------CREATE A NEW CONTACT------------- //
 
 async function addContact( body ) {
   const { name, email, phone_number, marital_status, contact_location, user_id } = body;
@@ -20,9 +22,13 @@ async function addContact( body ) {
   return await contact.save();
 };
 
+// ------------GET A SINGLE CONTACT BY ID------------- //
+
 async function getContactbyId (id) {
   return await Contact.findById(id)
 };
+
+// ------------GET A SINGLE CONTACT BY EMAIL OR PHONE_NUMBER------------- //
 
 async function getContact( phone_number, email) {
   if (phone_number) return await Contact.findOne( { phone_number: phone_number } );
@@ -30,7 +36,9 @@ async function getContact( phone_number, email) {
   return ("Contact Already in Database")
 };
 
-// Search based on request given
+
+// ------------SEARCH BASED ON REQUEST GIVEN------------- //
+
 async function searchContacts (name,  email, number, method) {
 
   if (name) {
@@ -38,10 +46,10 @@ async function searchContacts (name,  email, number, method) {
       return await Contact.find({ 'name': new RegExp(name) }); // https://stackoverflow.com/a/10616781/18590539
     
     } else if (method === "starts") { 
-      return await Contact.find({ 'name': { $regex: "^" + name, $options: 'i' }}); // https://stackoverflow.com/a/29809918/18590539
-
-    } else if (method === "ends") {
-      return await Contact.find({ 'name': { $regex: name + "$", $options: "i" }}); // https://stackoverflow.com/a/61211127/18590539
+        return await Contact.find({ 'name': { $regex: "^" + name, $options: 'i' }}); // https://stackoverflow.com/a/29809918/18590539
+    }
+      else if (method === "ends") {
+        return await Contact.find({ 'name': { $regex: name + "$", $options: "i" }}); // https://stackoverflow.com/a/61211127/18590539
     } 
       return "no method given";
 
@@ -74,9 +82,9 @@ async function searchContacts (name,  email, number, method) {
 }
 
 module.exports = {
-  getContacts,
   addContact,
   getContact,
-  getContactbyId,
+  getContacts,
   searchContacts,
+  getContactbyId,
 };

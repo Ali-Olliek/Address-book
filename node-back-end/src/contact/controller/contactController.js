@@ -1,13 +1,16 @@
 const {
-  getContacts,
-  getContactbyId,
-  getContact,
-  addContact,
-  searchContacts,
+    getContact,
+    addContact,
+    getContacts,
+    searchContacts,
+    getContactbyId,
 } = require("../service");
 
 const User = require("../../../model/Contact");
 const jwt = require("jsonwebtoken");
+const Contact = require("../../../model/Contact");
+
+// ------------CREATE A NEW CONTACT------------- //
 
 async function createContact(req, res) {
     try {
@@ -42,8 +45,23 @@ async function createContact(req, res) {
         console.log(err);
     }
 };
+// ------------UPDATE EXISTING CONTACT------------- //
+
+async function updateContact (req, res) {   // https://www.youtube.com/watch?v=M2u1W2CzXdE
+    const condition = {_id: req.params.id};
+    Contact.updateOne(condition, req.body)
+    .then(doc => {
+        if (!doc) return res.status(400).send("Didn't Update")
+        return res.status(200).json(doc)
+    })
+    .catch(err => next(err));
+} 
+
+
+// ------------DISPLAY ALL CONTACTS------------- //
 
 async function displayAll(req, res) {
+
 
     try {
     if (req.body.user_id) {
@@ -57,6 +75,8 @@ async function displayAll(req, res) {
         console.log(error)
     }
 }
+
+// ------------DISPLAY CONTACT------------- //
 
 async function displayOne(req, res) {
 
@@ -72,6 +92,8 @@ async function displayOne(req, res) {
     }
 }
 
+// ------------SEARCH------------- // 
+
 async function search(req, res) {
     try {
         const name = req.body.name;
@@ -82,7 +104,7 @@ async function search(req, res) {
         const result = await searchContacts(name, email, number, method);
         console.log("found => ", result);
 
-    return res.status(200).send(result);
+    res.status(200).send(result);
     } catch (error) {
         console.log(error)
     }
@@ -90,8 +112,9 @@ async function search(req, res) {
     
 
 module.exports = {
-  createContact,
-  displayAll,
-  displayOne,
-  search
+    search,
+    displayAll,
+    displayOne,
+    updateContact,
+    createContact,
 };
