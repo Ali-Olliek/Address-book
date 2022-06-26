@@ -61,7 +61,7 @@ async function updateContact (req, res) {   // https://www.youtube.com/watch?v=M
     .catch(err => next(err));
 } 
 
-// ------------DElETE A SINGLE CONTACT------------- //
+// ------------DELETE A SINGLE CONTACT------------- //
 async function deleteContact (req, res) {
  
     const id = {_id: req.params.id}
@@ -94,13 +94,12 @@ async function displayAll(req, res) {
 // ------------DISPLAY CONTACT------------- //
 
 async function displayOne(req, res) {
-
     try { 
         if(req.body.contact_id) {
-        const id = req.body.contact_id
-        const result = await getContactById(id);
-        console.log("Contact => ", result);
-        return res.status(200).send(result)
+            const id = req.body.contact_id
+            const result = await getContactById(id);
+            console.log("Contact => ", result);
+            return res.status(200).send(result)
         }
     } catch (error) {
         console.log(error)
@@ -111,12 +110,11 @@ async function displayOne(req, res) {
 
 async function search(req, res) {
     try {
-        const name = req.body.name;
-        const email = req.body.email;
-        const number = req.body.number;
+        const searchContent = req.body.searchContent;
+        const property = req.body.property;
         const method = req.body.method;
 
-        const result = await searchContacts(name, email, number, method);
+        const result = await searchContacts(searchContent, property, method);
         console.log("found => ", result);
 
     res.status(200).send(result);

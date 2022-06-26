@@ -20,7 +20,7 @@ router.get("/Contact", displayOne);
 router.post("/CreateContact", createContact);
 router.post("/UpdateContact/:id?", updateContact);
 router.get("/DeleteContact/:id?", deleteContact);
-router.get("/Search", search);
+router.post("/Search", search);
 
 // ^ stackoverflow.com/a/41748728/18590539
 

@@ -1,8 +1,8 @@
 // All queries needed to execute the functions from the Controller
 // includes creating, searching, getting by id, and deleting
 
-
 const Contact = require("../../model/Contact");
+
 
 async function getContacts(id) {
   return await Contact.find({user_id: id});
@@ -48,48 +48,47 @@ async function getContact( phone_number, email) {
 
 // ------------SEARCH BASED ON REQUEST GIVEN------------- //
 
-async function searchContacts (name,  email, number, method) {
-
-  if (name) {
-    if (method === "includes") {
-      return await Contact.find({ 'name': new RegExp(name) }); // https://stackoverflow.com/a/10616781/18590539
-    
-    } else if (method === "starts") { 
-        return await Contact.find({ 'name': { $regex: "^" + name, $options: 'i' }}); // https://stackoverflow.com/a/29809918/18590539
+async function searchContacts (searchContent, property, method) {
+  if (property === "Name") {
+    if (method === "Includes") {
+      return await Contact.find({ name: new RegExp(searchContent) }); // https://stackoverflow.com/a/10616781/18590539
+      
+    } else if (method === "Starts with") { 
+      return await Contact.find({
+        name: { $regex: "^" + searchContent, $options: "i" },
+      }); // https://stackoverflow.com/a/29809918/18590539
     }
-      else if (method === "ends") {
-        return await Contact.find({ 'name': { $regex: name + "$", $options: "i" }}); // https://stackoverflow.com/a/61211127/18590539
+    else if (method === "Ends with") {
+        return await Contact.find({
+          name: { $regex: searchContent + "$", $options: "i" },
+        }); // https://stackoverflow.com/a/61211127/18590539
     } 
       return "no method given";
     } 
 
-  else if (number) {
-    if (method === "includes") {
-      return await Contact.find({ 'phone_number': new RegExp(number) });
-
-    } else if (method === "starts") {
-      return await Contact.find({ 'phone_number': { $regex: "^" + number }});
-
-    } else if (method === "ends") {
-      return await Contact.find({ 'phone_number': { $regex: number + "$" }});
+  else if (property === "Phone Number") {
+    if (method === "Includes") {
+      return await Contact.find({ phone_number: new RegExp(searchContent) });
+    } else if (method === "Starts with") {
+      return await Contact.find({
+        phone_number: { $regex: "^" + searchContent },
+      });
+    } else if (method === "Ends with") {
+      return await Contact.find({
+        phone_number: { $regex: searchContent + "$" },
+      });
     }
-    return ("no method given");
-    } 
-    
-  else if (email) {
-    if (method === "includes") {
-      return await Contact.find({ 'email': new RegExp(email) });
-
-    } else if (method === "starts") {
-      return await Contact.find({ 'email': { $regex: "^" + email }}); 
-
-    } else if (method === "ends") {
-      return await Contact.find({ 'email': { $regex: email + "$" }});
-
+    return "no method given";
+  } else if (property === "Email") {
+    if (method === "Includes") {
+      return await Contact.find({ email: new RegExp(searchContent) });
+    } else if (method === "Starts with") {
+      return await Contact.find({ email: { $regex: "^" + searchContent } });
+    } else if (method === "Ends with") {
+      return await Contact.find({ email: { $regex: searchContent + "$" } });
     }
-    return ("no method given");
-  }
-    else return console.log("Nothing Submitted for Searching")
+    return "no method given";
+  } else return console.log("Nothing Submitted for Searching");
 }
 
 module.exports = {
