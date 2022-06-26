@@ -6,10 +6,12 @@ async function getUsers() {
 }
 
 
-async function addUser(body, hashPassword) {
+async function addUser(body) {
+  console.log(body.hashPassword)
   const {
     name,
     email,
+    hashPassword,
   } = body;
   const user = new User({
     name,

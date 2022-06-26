@@ -37,7 +37,7 @@ async function register(req, res) {
 
     // check if user already exist
     // Validate if user exist in our database
-    const oldUser = await getByEmail({ email });
+    const oldUser = await getByEmail( email );
 
     if (oldUser) {
       return res.status(409).send("User Already Exist. Please Login");
@@ -50,7 +50,7 @@ async function register(req, res) {
     const user = await addUser({
       name,
       email: email.toLowerCase(), // sanitize: convert email to lowercase
-      password: encryptedPassword,
+      hashPassword: encryptedPassword,
     });
 
     // Create token
@@ -72,7 +72,6 @@ async function register(req, res) {
 }
 
 async function login(req, res) {
-  console.log(req.body)
   try {
     // Get user input
     const { email, password } = req.body;
