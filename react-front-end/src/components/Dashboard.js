@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import book from '../assets/svgs/book.png';
 import add from '../assets/svgs/add.png';
+import search from '../assets/svgs/search.png'
 import '../styles/main/main.css'
 import axios from 'axios';
 
@@ -26,7 +27,6 @@ export default function Dashboard() {
     
     const handleSearch = async (e) => {
         e.preventDefault();
-        console.log(searchFields[0])
         
         let searchContent = searchFields[0].searchContent
         let method = searchFields[0].method
@@ -54,13 +54,13 @@ export default function Dashboard() {
             </div>
             {searchFields.map((field, index) => (
             <div key={index} className="searchbar">
-                <input
-                    value={field.searchContent}
-                    name="searchContent"
-                    type={"text"}
-                    placeholder="&#x1F50D; Search"
-                    onChange={(e) => {
-                    handleSearchInput(index, e);
+                    <input
+                        value={field.searchContent}
+                        name="searchContent"
+                        type={"text"}
+                        placeholder="Search"
+                        onChange={(e) => {
+                        handleSearchInput(index, e);
                     }}/>
                 <p>Specify Method</p>
                 <select
@@ -84,7 +84,9 @@ export default function Dashboard() {
                     <option value={property}>{property}</option>
                     ))}
                 </select>
-                <button type='submit' onClick={handleSearch}>Search</button>
+                <button type='submit' onClick={handleSearch}>
+                    <img src={search}/>
+                </button>
             </div>
             ))}
             <div className="display">

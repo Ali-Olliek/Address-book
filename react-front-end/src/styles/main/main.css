@@ -62,6 +62,7 @@
     color: white;
     border: 0px;
     border-radius: 5px;
+    padding: 5px 10px;
 }
 
 .searchbar > select {
@@ -73,16 +74,18 @@
 }
 
 .searchbar > button {
-    width: min-content;
+    width: 50%;
     border-radius: 5px;
-    padding: 10px 20px;
+    padding: 4px 40px;
     margin-top: 10px;
+    height: 30px;
 }
 
 .searchbar > button:hover {
     background-color: lightgreen;
     transform: scale(1.03);
 }
+
 
 .User {
     background-color:#fca311;
@@ -99,10 +102,10 @@ img {
 
 .display > button {
     background-color: #e5e5e5;
-    width: 100%;
+    width: 50%;
     border-radius: 5px;
     border: 1px solid black;
-    margin-block: 5px;
+    margin: 5px 10px;
     padding-top: 3px;
 }
 
