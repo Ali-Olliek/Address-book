@@ -4,13 +4,14 @@ import add from '../assets/svgs/add.png';
 import search from '../assets/svgs/search.png'
 import '../styles/main/main.css'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function Dashboard() {
 
     const methods = ["Starts with", "Ends with", "Includes"];
     const contactProperty = ["Name", "Email", "Phone Number"];
-
+    const navigate = useNavigate();
     const [searchFields, setSearchFields] = useState([
     {
         searchContent : "",
@@ -93,7 +94,10 @@ export default function Dashboard() {
             <button>
                 <img src={book} />
             </button>
-            <button>
+            <button onClick={(e) => {
+                e.preventDefault();
+                navigate("/Contacts")
+            }}>
                 <img src={add} />
             </button>
             <div>
