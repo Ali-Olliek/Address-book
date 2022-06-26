@@ -54,6 +54,7 @@ export default function SignUp() {
 
   return (
     <div className="Page signUp area">
+      <h1 className="title">Address Book</h1>
       <Circles />
       <form className="Form Auth signUpPage">
         <h2>Sign Up</h2>
@@ -92,7 +93,7 @@ export default function SignUp() {
         {submitted && !values.Password ? (
           <span>Please enter an Password</span>
         ) : null}
-        <button onClick={handleSubmit} type="submit">
+        <button className="Primary" onClick={handleSubmit} type="submit">
           Sign Up
         </button>
       </form>

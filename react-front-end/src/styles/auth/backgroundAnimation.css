@@ -6,8 +6,8 @@ body {
 
 .area {
     z-index: 0;
-    background: #4e54c8;
-    background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
+    background: #062BD8;
+    background: -webkit-linear-gradient(to left, #062BD8, #062BD8);
     width: 100%;
     height: 100vh;
 }
@@ -29,7 +29,7 @@ body {
     width: 20px;
     height: 20px;
     background: rgba(255, 255, 255, 0.2);
-    animation: animate 25s linear infinite;
+    animation: animate 10s linear infinite;
     bottom: -150px;
 
 }

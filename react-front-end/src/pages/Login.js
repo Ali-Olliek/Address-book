@@ -17,7 +17,6 @@ export default function Login() {
   // Redirection Function
   const goToSignUp = (e) => {
     e.preventDefault();
-    console.log("Hello");
     window.location.href = "/SignUp";
   };
 
@@ -65,9 +64,9 @@ export default function Login() {
 
 
   return (
-    <>
-      <div className="Page logIn">
-    <Circles />
+    <div className="Page logIn">
+      <h1 className="title">Address Book</h1>
+      <Circles />
         <form className="Form Auth logInPage">
           <h2>Sign In</h2>
           <p>Welcome Back</p>
@@ -102,11 +101,10 @@ export default function Login() {
           <button className="btn Primary" onClick={handleSubmit} type="submit">
             Login
           </button>
-          <button className="btn secondary" onClick={goToSignUp}>
+          <button className="btn Secondary" onClick={goToSignUp}>
             Sign Up
           </button>
         </form>
       </div>
-    </>
   );
 }
