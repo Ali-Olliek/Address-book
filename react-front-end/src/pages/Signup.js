@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../styles/auth/auth.css";
 import "../styles/auth/backgroundAnimation.css";
-import Circles from "../components/circles";
+import Circles from "../components/Circles";
 
 export default function SignUp() {
   // States
@@ -54,7 +54,7 @@ export default function SignUp() {
 
   return (
     <div className="Page signUp area">
-    <Circles/>
+      <Circles />
       <form className="Form Auth signUpPage">
         <h2>Sign Up</h2>
         <p>Everyone In One Place</p>
@@ -93,7 +93,7 @@ export default function SignUp() {
           <span>Please enter an Password</span>
         ) : null}
         <button onClick={handleSubmit} type="submit">
-          Login
+          Sign Up
         </button>
       </form>
     </div>

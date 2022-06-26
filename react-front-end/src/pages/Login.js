@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "../styles/auth/backgroundAnimation.css";
-import '../styles/auth/auth.css'
-import Circles from '../components/circles'
+import '../styles/auth/auth.css';
+import Circles from '../components/Circles';
+
 
 export default function Login() {
   const [values, setValues] = useState({
