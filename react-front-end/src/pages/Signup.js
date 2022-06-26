@@ -29,26 +29,26 @@ export default function SignUp() {
   // Submit Handles
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log('clicked')
 
-    let username = values.Username;
+    let name = values.Username;
     let email = values.Email;
     let password = values.Password;
 
     return axios
-      .post("localhost:3000/api/user/auth/register", {
-        username,
+      .post("http://localhost:3000/api/user/auth/register", {
+        name,
         email,
         password,
       })
-      .then((response) => {
-        if (response.status === 200) {
-          console.log(response.data.user.name);
+      .then((res) => {
+        console.log(res.data[0])
+        if (res.status === 200) {
           let user = [];
-          user.push(response.data.user.name, response.data.user.id);
+          user.push(res.data[0], res.data[1]);
           localStorage.setItem("user", JSON.stringify(user));
-          window.location.href = "/Surveys";
         }
-        return response.data;
+        return res.data;
       });
   };
 

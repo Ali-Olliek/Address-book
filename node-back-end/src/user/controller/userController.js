@@ -40,7 +40,7 @@ async function register(req, res) {
     const oldUser = await getByEmail( email );
 
     if (oldUser) {
-      return res.status(409).send("User Already Exist. Please Login");
+      res.status(409).send();
     }
 
     //Encrypt user password
@@ -64,8 +64,9 @@ async function register(req, res) {
     // save user token
     user.token = token;
 
+
     // return new user
-    res.status(200).json(user);
+    res.status(200).json([user.name, user.token]).send();
   } catch (err) {
     console.log(err);
   }
