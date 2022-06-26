@@ -40,7 +40,7 @@
     background: url(../../assets/images/patternpad\ \(3\).png);
     background-color: white;
     background-position:top right;
-    background-size: 150px 150px;
+    background-size: 50px 50px;
     background-repeat: no-repeat;
 }
 
@@ -50,7 +50,6 @@
 
 .Form > p {
     font-family: Poppins;
-    margin-top: -40px;
     width: min-content;
 }
 
