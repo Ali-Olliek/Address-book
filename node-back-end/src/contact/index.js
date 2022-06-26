@@ -15,7 +15,7 @@ const JWTMiddleware = require("../../middleware/auth.js");
 // res -> your api response
 
 router.get("/", JWTMiddleware, (req, res) => get(req, res));
-router.get("/Contacts", displayAll); 
+router.get("/Contacts/:user_id?", displayAll); 
 router.get("/Contact", displayOne);
 router.post("/CreateContact", createContact);
 router.post("/UpdateContact/:id?", updateContact);

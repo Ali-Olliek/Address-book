@@ -76,11 +76,10 @@ async function deleteContact (req, res) {
 // ------------DISPLAY ALL CONTACTS------------- //
 
 async function displayAll(req, res) {
-
-
+    console.log(req.params.user_id)
     try {
-    if (req.body.user_id) {
-      const id = req.body.user_id;
+    if (req.params.user_id) {
+      const id = req.params.user_id;
       const result = await getContacts(id);
       console.log("Contacts for this Users =>", result);
       return res.status(200).send(result);
