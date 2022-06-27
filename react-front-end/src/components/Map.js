@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import DraggableMarker from "./DraggableMarker";
-import ExternalState from "./ExternalState";
 import "../styles/main/main.css";
 
 

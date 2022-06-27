@@ -10,7 +10,9 @@ export default function Contact({contact}) {
         <p>Contact Email: {contact.email}</p>
         <p>Contact Phone Number: {contact.phone_number}</p>
         <p>Marital Status: {(contact.marital_status) && (<p>Married</p>) ? Married : "Married"}</p>
-        <Map name ={contact.name} location={contact.contact_location}/>
+        <div>
+          <Map name ={contact.name} location={contact.contact_location}/>
+        </div>
     </div>
   )
 }
