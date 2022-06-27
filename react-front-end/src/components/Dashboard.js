@@ -26,7 +26,7 @@ export default function Dashboard() {
     const userDataList = user.split(',')
     const original_username = userDataList[0]
     const username = original_username.replace(/(['"])/g, "").replace("[", "");
-
+    const user_id = userDataList[1].replace(/(['"])/g, "").replace("[", "");
     console.log(username)
 
     const handleSearchInput = (index, e) => {
@@ -47,9 +47,10 @@ export default function Dashboard() {
         let property = searchFields[0].property
 
         return axios.post("http://localhost:3000/api/contacts/Search", {
-            searchContent,
-            method,
-            property,
+          user_id,
+          searchContent,
+          method,
+          property,
           })
           .then(function (res) {
             if (res.status === 200) {

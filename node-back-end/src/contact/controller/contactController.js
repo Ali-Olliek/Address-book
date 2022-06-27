@@ -110,11 +110,13 @@ async function displayOne(req, res) {
 
 async function search(req, res) {
     try {
+        const user_id = req.body.user_id;
+        const contacts = await getContacts(user_id); 
         const searchContent = req.body.searchContent;
         const property = req.body.property;
         const method = req.body.method;
 
-        const result = await searchContacts(searchContent, property, method);
+        const result = await searchContacts(searchContent, property, method, contacts);
         console.log("found => ", result);
 
     res.status(200).send(result);
