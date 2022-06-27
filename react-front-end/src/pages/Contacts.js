@@ -32,6 +32,7 @@ export default function Contacts() {
 
 
   return (
+    <>
     <div className='ContactsList'>
         <h1>Your Contacts</h1>
         {contacts.map((contact, index)=>{
@@ -48,12 +49,15 @@ export default function Contacts() {
               </>
             );
         })}
-        <div>
-            {displayContact
-                && 
-                <Contact 
-                name={contact.id}/>}
-        </div>
     </div>
+        <div>
+            {(displayContact === true)
+                && (
+                <Contact
+                  contact={contact}
+                />)
+                }
+        </div>
+    </>
   )
 }
