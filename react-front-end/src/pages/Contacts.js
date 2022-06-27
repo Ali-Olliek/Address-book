@@ -25,13 +25,11 @@ export default function Contacts() {
         getData();
     }, []);
 
-    const passDataToParent = (e) => {
-        setDisplayContent(e)
+    const passDataToParent = (status, e) => {
+        setDisplayContent(status)
+        setContact(e)
     }
 
-    const handleContactDisplay = (e) => {
-        console.log(e.currentTarget.id)
-    }
 
   return (
     <div className='ContactsList'>
@@ -39,11 +37,11 @@ export default function Contacts() {
         {contacts.map((contact, index)=>{
             return (
               <>
-                <div>
+                <div key={index}>
                   <ContactCard
-                    handleContactDisplay={handleContactDisplay}
                     key={contact.id}
                     name={contact.name}
+                    contact={contact}
                     passDataToParent={passDataToParent}
                   />
                 </div>
