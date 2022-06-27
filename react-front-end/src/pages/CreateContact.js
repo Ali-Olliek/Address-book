@@ -47,7 +47,7 @@ export default function CreateContact({setDisplay}) {
           user_id
         })
         .then((res) => {
-          console.log(res.data[0]);
+          console.log(res.data);
           if (res.status === 200) {
               console.log(res.data)
               setDisplay(false)

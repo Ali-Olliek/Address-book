@@ -39,7 +39,7 @@ export default function Contacts() {
     <>
     <div className='ContactsList'>
         <h1>Your Contacts</h1>
-        {(contacts) ? <p>No Contacts Found</p> : contacts.map((contact, index)=>{
+        {(!contacts) ? <p>No Contacts Found</p> : contacts.map((contact, index)=>{
             return (
               <>
                 <div key={index}>
