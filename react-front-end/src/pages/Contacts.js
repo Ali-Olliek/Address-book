@@ -11,8 +11,13 @@ export default function Contacts() {
     const [displayContact, setDisplayContent] = useState(false);
     const [contact, setContact ] = useState([]);
 
+
+    const user = localStorage.getItem("user");
+    const userDataList = user.split(",");
+    const user_id = userDataList[1];
+
     const getContacts = async () => {
-        const res = await fetch(`http://localhost:3000/api/contacts/Contacts/62b5a8c7abeddb3708d9601d`);
+        const res = await fetch(`http://localhost:3000/api/contacts/Contacts/${user_id}`);
         const data = await res.json();
         return data;
     };
@@ -35,7 +40,7 @@ export default function Contacts() {
     <>
     <div className='ContactsList'>
         <h1>Your Contacts</h1>
-        {contacts.map((contact, index)=>{
+        {(contacts) ? <p>No Contacts Found</p> : contacts.map((contact, index)=>{
             return (
               <>
                 <div key={index}>
