@@ -83,7 +83,8 @@ async function login(req, res) {
     }
 
     // Validate if user exist in our database
-    const user = await User.findOne({ email });
+    const user = await getByEmail( email );
+    console.log(user)
 
     if (user && (await bcrypt.compare(password, user.password))) {
       // Create token

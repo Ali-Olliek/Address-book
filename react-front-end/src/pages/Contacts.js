@@ -30,7 +30,7 @@ export default function Contacts() {
     }
 
     const handleContactDisplay = (e) => {
-        console.log(e.currentTarget)
+        console.log(e.currentTarget.id)
     }
 
   return (
