@@ -27,7 +27,7 @@ export default function Dashboard() {
     const original_username = userDataList[0]
     const username = original_username.replace(/(['"])/g, "").replace("[", "");
     const user_id = userDataList[1].replace(/(['"])/g, "").replace("[", "");
-    console.log(username)
+
 
     const handleSearchInput = (index, e) => {
         let data = [...searchFields];

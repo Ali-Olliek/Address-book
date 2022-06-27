@@ -49,10 +49,9 @@ async function getContact( phone_number, email) {
 // ------------SEARCH BASED ON REQUEST GIVEN------------- //
 
 async function searchContacts (searchContent, property, method, contacts) {
-
   if (property === "Name") {
     if (method === "Includes") {
-      return await Contact.find({ name: new RegExp(searchContent) }); // https://stackoverflow.com/a/10616781/18590539
+      return await Contact.find( { name: new RegExp(searchContent) }); // https://stackoverflow.com/a/10616781/18590539
       
     } else if (method === "Starts with") { 
       return await Contact.find({

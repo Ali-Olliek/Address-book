@@ -77,7 +77,6 @@ async function deleteContact (req, res) {
 // ------------DISPLAY ALL CONTACTS------------- //
 
 async function displayAll(req, res) {
-    console.log(req.params.user_id)
     try {
     if (req.params.user_id) {
       const id = req.params.user_id;
@@ -111,14 +110,12 @@ async function displayOne(req, res) {
 async function search(req, res) {
     try {
         const user_id = req.body.user_id;
-        const contacts = await getContacts(user_id); 
         const searchContent = req.body.searchContent;
         const property = req.body.property;
         const method = req.body.method;
-
+        
         const result = await searchContacts(searchContent, property, method, contacts);
-        console.log("found => ", result);
-
+        
     res.status(200).send(result);
     } catch (error) {
         console.log(error)
