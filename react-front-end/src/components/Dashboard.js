@@ -10,9 +10,9 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
 
+    const navigate = useNavigate();
     const methods = ["Starts with", "Ends with", "Includes"];
     const contactProperty = ["Name", "Email", "Phone Number"];
-    const navigate = useNavigate();
     const [addContact, setAddContact] = useState(false)
     const [searchFields, setSearchFields] = useState([
     {
@@ -21,9 +21,13 @@ export default function Dashboard() {
         property : "Name"
     }
     ])
+
     const user = localStorage.getItem('user')
     const userDataList = user.split(',')
-    const username = userDataList[0]
+    const original_username = userDataList[0]
+    const username = original_username.replace(/(['"])/g, "").replace("[", "");
+
+    console.log(username)
 
     const handleSearchInput = (index, e) => {
         let data = [...searchFields];
@@ -31,7 +35,6 @@ export default function Dashboard() {
         setSearchFields(data)
     }
     
-
     const handleAdd = (e) => {
         setAddContact(true)
     }
@@ -59,66 +62,69 @@ export default function Dashboard() {
 
 
     return (
-        <>
-            <div className="dashBoard-Container">
-                <div className="User">
-                <h2>Hello, {username}</h2>
-                </div>
-                {searchFields.map((field, index) => (
-                <div key={index} className="searchbar">
-                        <input
-                            value={field.searchContent}
-                            name="searchContent"
-                            type={"text"}
-                            placeholder="Search"
-                            onChange={(e) => {
-                            handleSearchInput(index, e);
-                        }}/>
-                    <p>Specify Method</p>
-                    <select
-                        value={field.method}
-                        name="method"
-                        onChange={(e) => {
-                        handleSearchInput(index, e);
-                        }}>
-                        {methods.map((method) => (
-                        <option value={method}>{method}</option>
-                        ))}
-                    </select>
-                    <p>Specify Property</p>
-                    <select
-                        value={field.property}
-                        name="property"
-                        onChange={(e) => {
-                        handleSearchInput(index, e);
-                        }}>
-                        {contactProperty.map((property) => (
-                        <option value={property}>{property}</option>
-                        ))}
-                    </select>
-                    <button type='submit' onClick={handleSearch}>
-                        <img src={search}/>
-                    </button>
-                </div>
-                ))}
-                <div className="display">
-                <button>
-                    <img src={book} />
-                </button>
-                <button onClick={handleAdd}>
-                    <img src={add} />
-                </button>
-                <div>
-                </div>
-                </div>
-                    <button className='secondary'> Log Out </button>
+      <>
+        <div className="dashBoard-Container">
+          <div className='tophalf'>
+            <div className="User">
+              <h2>Hello, {username}</h2>
             </div>
-            {(addContact) && (
-            <div className='createContact'>
-                <CreateContact setDisplay={setAddContact}/>
-            </div>
+            {searchFields.map((field, index) => (
+              <div key={index} className="searchbar">
+                <input
+                  value={field.searchContent}
+                  name="searchContent"
+                  type={"text"}
+                  placeholder="Search"
+                  onChange={(e) => {
+                    handleSearchInput(index, e);
+                  }}
+                />
+                <p>Specify Method</p>
+                <select
+                  value={field.method}
+                  name="method"
+                  onChange={(e) => {
+                    handleSearchInput(index, e);
+                  }}
+                >
+                  {methods.map((method) => (
+                    <option value={method}>{method}</option>
+                  ))}
+                </select>
+                <p>Specify Property</p>
+                <select
+                  value={field.property}
+                  name="property"
+                  onChange={(e) => {
+                    handleSearchInput(index, e);
+                  }}
+                >
+                  {contactProperty.map((property) => (
+                    <option value={property}>{property}</option>
+                  ))}
+                </select>
+                <button type="submit" onClick={handleSearch}>
+                  <img src={search} />
+                </button>
+              </div>
+            ))}
+          </div>
+          <div className="display">
+            <button>
+              <img src={book} />
+            </button>
+            <button onClick={handleAdd}>
+              <img src={add} />
+            </button>
+            <div></div>
+          </div>
+          <button className="secondary"> Log Out </button>
+        </div>
+        {addContact && (
+          <div className="createContact">
+            <CreateContact setDisplay={setAddContact} />
+          </div>
         )}
       </>
-
     );
 }
