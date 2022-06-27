@@ -29,7 +29,6 @@ export default function SignUp() {
   // Submit Handles
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('clicked')
 
     let name = values.Username;
     let email = values.Email;
@@ -42,11 +41,16 @@ export default function SignUp() {
         password,
       })
       .then((res) => {
-        console.log(res.data[0])
+        console.log(res)
         if (res.status === 200) {
           let user = [];
-          user.push(res.data[0], res.data[1]);
+          user.push(
+            res.data.name,
+            res.data._id,
+            res.data.token
+          );
           localStorage.setItem("user", JSON.stringify(user));
+          window.location.href = "/Main";
         }
         return res.data;
       });
