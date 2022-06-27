@@ -3,7 +3,7 @@ import '../styles/main/main.css'
 import Map from '../components/Map'
 import axios from 'axios'
 
-export default function CreateContact() {
+export default function CreateContact({setDisplay}) {
     const [ contactDetails, setContactDetails] = useState([
         {
             name:"",
@@ -53,6 +53,7 @@ export default function CreateContact() {
           console.log(res.data[0]);
           if (res.status === 200) {
               console.log(res.data)
+              setDisplay(false)
           }
           return res.data;
         });

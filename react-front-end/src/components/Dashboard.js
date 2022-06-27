@@ -23,7 +23,6 @@ export default function Dashboard() {
     ])
     const user = localStorage.getItem('user')
     const userDataList = user.split(',')
-    console.log(userDataList)
     const username = userDataList[0]
 
     const handleSearchInput = (index, e) => {
@@ -113,11 +112,11 @@ export default function Dashboard() {
                 </div>
                 </div>
                     <button className='secondary'> Log Out </button>
-        </div>
-        {(addContact) && (
-        <div className='createContact'>
-            <CreateContact/>
-        </div>
+            </div>
+            {(addContact) && (
+            <div className='createContact'>
+                <CreateContact setDisplay={setAddContact}/>
+            </div>
         )}
       </>
 
