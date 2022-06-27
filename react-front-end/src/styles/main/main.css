@@ -36,10 +36,15 @@
     justify-content: space-between;
     text-align: center;
     padding: 20px 10px;
-    background-color: #14213d;
+    background-color: #062BD8;
     border-radius: 20px;
 }
-
+.tophalf {
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 .searchbar {
     height: 30%;
     display: flex;
@@ -50,7 +55,7 @@
 
 .searchbar > p {
     font-family: Sofia Pro;
-    font-size: 10px;
+    font-size: 12px;
     color: #e5e5e5;
     padding-bottom: 5px;
     border-bottom: 1px solid white;
@@ -58,8 +63,8 @@
 
 .searchbar > input {
     width: 100%;
-    background-color: #14213d;
-    color: white;
+    background-color: white;
+    color: black;
     border: 1px solid white;
     border-radius: 5px;
     padding: 5px 10px;
@@ -67,7 +72,9 @@
 
 .searchbar > select {
     font-size: 12px;
-    background-color: #14213d;
+    height: 30px;
+    background-color: black;
+    padding-inline: 5px;
     border: 0px;
     color: white;
     border-radius: 5px;
@@ -93,11 +100,15 @@
 
 
 .User {
-    background-color:#fca311;
     height: 100px;
     padding-top: 35px;
     border-radius: 8px;
     font-family: Poppins;
+    background: url(../../assets/images/patternpad\ \(3\).png);
+    background-size: 35px;
+    background-position: top right;
+    background-repeat: no-repeat;
+    background-color:white;
 }
 
 img {
@@ -107,7 +118,8 @@ img {
 
 .display > button {
     background-color: #e5e5e5;
-    width: 50%;
+    width: 80%;
+    height: 40px;
     border-radius: 5px;
     border: 1px solid black;
     margin: 5px 10px;
@@ -117,6 +129,13 @@ img {
 .display > button:hover {
     background-color: #fca311;
     transform: scale(1.03);
+}
+
+.secondary {
+    width: 50%;
+    margin: 5px 45px;
+    height: 30px;
+    border-radius: 5px;
 }
 
 .ContactsList {
@@ -134,6 +153,7 @@ img {
     flex-wrap: wrap;
     justify-content: center;
     gap: 5px;
+    text-align:center;
 }
 
 .ContactsList > h1 {
@@ -179,4 +199,39 @@ img {
     height: 95vh;
     border: 1px solid black;
     padding: 20px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.Contact > h1 {
+    font-family: Poppins;
+}
+
+
+.CreateContact {
+    position: absolute;
+    left: 550px;
+    top: 2.5vh;
+    height: 95vh;
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid black;
+    width: 450px;
+}
+
+.CreateContactForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 50vh;
+    margin-block: 20px;
+}
+
+
+.map {
+    width: 400px;
+    height: 250px;
+    border-radius: 20px;
+    margin-block: 20px;
 }
