@@ -14,8 +14,7 @@ export default function Contacts() {
 
     const user = localStorage.getItem("user");
     const userDataList = user.split(",");
-    const user_id = userDataList[1];
-
+    const user_id = userDataList[1].replace(/(['"])/g, "");
     const getContacts = async () => {
         const res = await fetch(`http://localhost:3000/api/contacts/Contacts/${user_id}`);
         const data = await res.json();

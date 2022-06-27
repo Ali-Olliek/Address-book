@@ -17,6 +17,7 @@ const Contact = require("../../../model/Contact");
 // ------------CREATE A NEW CONTACT------------- //
 
 async function createContact(req, res) {
+    console.log(req.body.user_id)
     try {
         const { 
             name,

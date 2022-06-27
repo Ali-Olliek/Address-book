@@ -9,7 +9,6 @@ export default function CreateContact({setDisplay}) {
             name:"",
             email: "",
             phone_number: "",
-            marital_status: false,
             location : []
         }
     ])
@@ -32,20 +31,18 @@ export default function CreateContact({setDisplay}) {
 
     const handleSubmit = async (event) => {
       event.preventDefault();
-        console.log(contactDetails[0].name)
+
       let name = contactDetails[0].name;
       let email = contactDetails[0].email;
       let phone_number = contactDetails[0].phone_number;
-      let marital_status = contactDetails[0].marital_status;
       let contact_location = contactDetails[0].location;
-      let user_id = userid;
+      let user_id = userid.replace(/(['"])/g, "");
 
       return axios
         .post("http://localhost:3000/api/contacts/createContact", {
           name,
           email,
           phone_number,
-          marital_status,
           contact_location,
           user_id
         })
@@ -92,17 +89,6 @@ export default function CreateContact({setDisplay}) {
                 handleFormChange(index, e);
               }}
             />
-            <div>
-              <label>Married</label>
-              <input
-                type={"radio"}
-                name="marital_status"
-                value={detail.marital_status}
-                onChange={(e) => {
-                  handleFormChange(index, e);
-                }}
-              />
-            </div>
             <Map location={detail.contact_location} passLoc={passLocation}/> 
           </div>
         ))}
