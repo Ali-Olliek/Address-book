@@ -25,6 +25,7 @@ async function get(req, res) {
 }
 
 async function register(req, res) {
+  console.log(req.body)
   
   try {
     // Get user input
@@ -55,7 +56,7 @@ async function register(req, res) {
 
     // Create token
     const token = jwt.sign(
-      { user_id: user._id, email },
+      {user_id: user._id, email },
       `${process.env.TOKEN_SECRET}`,
       {
         expiresIn: "2h",
@@ -66,7 +67,7 @@ async function register(req, res) {
 
 
     // return new user
-    res.status(200).json([user.name, user.token]).send();
+    res.status(200).json(user).send();
   } catch (err) {
     console.log(err);
   }
