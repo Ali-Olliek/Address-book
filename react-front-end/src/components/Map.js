@@ -4,15 +4,14 @@ import DraggableMarker from "./DraggableMarker";
 import "../styles/main/main.css";
 
 
-export default function Map({location, passLoc}) {
+export default function Map({location, setMarkerLoc}) {
   let long;
   let lat;
   let position = []
 
-  
-  if(location === 0) {
-    long = location.location[0];
-    lat = location.location[1];
+  if(location !== 0) {
+    long = location[0];
+    lat = location[1];
     position = [long, lat];
   } else {
     long = 33.8938;
@@ -30,7 +29,7 @@ export default function Map({location, passLoc}) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
-      <DraggableMarker />
+      <DraggableMarker setMarkerLoc={setMarkerLoc}/>
     </MapContainer>
   );
 }

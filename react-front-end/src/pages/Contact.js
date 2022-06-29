@@ -3,7 +3,6 @@ import '../styles/main/main.css';
 import Map from '../components/Map';
 
 export default function Contact({contact}) {
-  const [Married, setMarried] = useState("Not Married")
   return (
     <div className='Contact'>
         <h1>Contact Name: {contact.name}</h1>

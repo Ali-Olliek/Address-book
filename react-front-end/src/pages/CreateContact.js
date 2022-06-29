@@ -25,11 +25,11 @@ export default function CreateContact({setDisplay}) {
 
     const handleSubmit = async (event) => {
       event.preventDefault();
-
+console.log(markerLoc)
       let name = contactDetails[0].name;
       let email = contactDetails[0].email;
       let phone_number = contactDetails[0].phone_number;
-      let contact_location = markerLoc;
+      let contact_location = [markerLoc.lat , markerLoc.lng];
       let user_id = userid.replace(/(['"])/g, "");
 
       return axios
