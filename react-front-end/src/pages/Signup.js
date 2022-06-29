@@ -29,7 +29,7 @@ export default function SignUp() {
   // Submit Handles
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    console.log("clicked");
     let name = values.Username;
     let email = values.Email;
     let password = values.Password;
