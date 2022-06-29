@@ -2,12 +2,12 @@ import React, {useState, useRef, useMemo, useCallback} from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 
-export default function DraggableMarker() {
+export default function DraggableMarker({setMarkerLoc}) {
     const center = {
       lat: 33.8938,
       lng: 35.5018,
     };
-    const [Loc, setLoc] = useState([])
+
     const [draggable, setDraggable] = useState(false);
     const [position, setPosition] = useState(center);
     const markerRef = useRef(null);
@@ -18,7 +18,7 @@ export default function DraggableMarker() {
             if (marker != null) {
             setPosition(marker.getLatLng());
             let pos = e.target.getLatLng()
-            setLoc(pos)
+            setMarkerLoc(pos)
             }
         },
         }),

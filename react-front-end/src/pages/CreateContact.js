@@ -12,13 +12,7 @@ export default function CreateContact({setDisplay}) {
             location : []
         }
     ])
-    const [contactLocation, setContactLocation] = useState([])
-
-    const passLocation = (Post) => {
-        setContactLocation(Post)
-        console.log("hello?")
-    }
-
+    const [markerLoc, setMarkerLoc] = useState([]);
 
     const handleFormChange = (index, e) => {
         let data = [...contactDetails];
@@ -35,7 +29,7 @@ export default function CreateContact({setDisplay}) {
       let name = contactDetails[0].name;
       let email = contactDetails[0].email;
       let phone_number = contactDetails[0].phone_number;
-      let contact_location = contactDetails[0].location;
+      let contact_location = markerLoc;
       let user_id = userid.replace(/(['"])/g, "");
 
       return axios
@@ -89,7 +83,7 @@ export default function CreateContact({setDisplay}) {
                 handleFormChange(index, e);
               }}
             />
-            <Map location={detail.contact_location} passLoc={passLocation}/> 
+            <Map setMarkerLoc={setMarkerLoc}/> 
           </div>
         ))}
         <button type="submit">Save Contact</button>
